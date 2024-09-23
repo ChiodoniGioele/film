@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from .routes.auth import auth_bp  # Importa il blueprint auth
 from .routes.admin import admin_bp
+from .routes.film import film_bp
 
 def create_app():
     app = Flask(__name__)
@@ -31,6 +32,7 @@ def create_app():
     # Registra i blueprint
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(film_bp, url_prefix='/film')
 
     # Aggiungi la route per la radice
     @app.route('/')

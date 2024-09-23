@@ -27,6 +27,7 @@ def login_post():
     login_user(user, remember=remember)
     return redirect(url_for('auth.profile'))
 
+
 @auth_bp.route('/signup', methods=['GET'])
 def signup():
     return render_template('auth/signup.html')
@@ -62,4 +63,4 @@ def logout():
 @auth_bp.route('/profile')
 @login_required
 def profile():
-    return render_template('auth/profile.html', name=current_user.username)
+    return render_template('home/profile.html', name=current_user.username)
