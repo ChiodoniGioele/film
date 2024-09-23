@@ -1,5 +1,8 @@
-# film
+# Film
 
+Web application that takes the RSI television schedule and allows you to find out about upcoming films.
 
-https://epg.rsi.ch/mp-epg-frontend-api/web/la1?Period=nowAndNext
+### URL request:
+
+> https://epg.rsi.ch/mp-epg-frontend-api/web/[channel]?Period=[time]
 
