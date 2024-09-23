@@ -1,26 +1,25 @@
-<!-- auth\login.html -->
 {% extends "base.html" %}
 
 {% block title %}Flask Login{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col">
-        <h3>Login</h3>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h3 class="text-center">Login</h3>
         <form method="POST" action="login">
             <div class="mb-3">
-                <input class="form-control" type="email" name="email" placeholder="Your Email" autofocus="">
+                <input class="form-control" type="email" name="email" placeholder="Your Email" required autofocus>
             </div>
-        
             <div class="mb-3">
-                <input class="form-control" type="password" name="password" placeholder="Your Password">
+                <input class="form-control" type="password" name="password" placeholder="Your Password" required>
             </div>
             <div class="mb-3 form-check">
                 <input class="form-check-input" type="checkbox" name="remember" id="remember-check">
                 <label class="form-check-label" for="remember-check">Remember me</label>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
+        <p class="text-center mt-3"><a href="{{ url_for('auth.signup') }}">Don't have an account? Sign up here.</a></p>
     </div>
 </div>
 {% endblock %}
