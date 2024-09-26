@@ -13,3 +13,26 @@ def getData(day):
     else:
         return {'error': 'Failed to retrieve data',
                 'status_code': response.status_code}  # Restituisci un errore in caso di fallimento
+
+def getPrograms(data):
+    programs = []
+    if 'program' in data:
+        for program_data in data['program']:
+            program = Program(program_data)
+            programs.append(program)
+
+    return programs
+
+class Program:
+    def __init__(self, data):
+        self.title = data["content"]["title"]
+        self.description = data["content"]["longDescription"]
+        self.eppisodes = data["content"]["episodeNr"]
+        self.people = data["people"]
+        self.image = data["srgPlay"]["Image"]["ImageRepresentation"]["variants"]
+        self.channel = data["channel"]
+        self.productionYear = data["content"]["productionYear"]
+        self.productTypeDesc = data["content"]["productTypeDesc"]
+        self.kind = data["kind"]
+        self.date = data["dateTimes"]["startTime"]
+        self.duration = data["dateTimes"]["realDuration"]
