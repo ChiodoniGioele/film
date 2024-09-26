@@ -25,7 +25,7 @@ def login_post():
         return redirect(url_for('auth.login')) 
 
     login_user(user, remember=remember)
-    return redirect(url_for('auth.profile'))
+    return redirect(url_for('home.home'))
 
 
 @auth_bp.route('/signup', methods=['GET'])

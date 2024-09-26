@@ -3,9 +3,13 @@ from .config.config import Config
 from .config.db import db
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from .routes.auth import auth_bp  # Importa il blueprint auth
+
+from .models.program import *
+from .routes.auth import auth_bp
 from .routes.admin import admin_bp
 from .routes.film import film_bp
+from .routes.home import home_bp
+
 
 def create_app():
     app = Flask(__name__)
@@ -30,9 +34,22 @@ def create_app():
         db.create_all()  # Crea tutte le tabelle se non esistono
 
     # Registra i blueprint
+    app.register_blueprint(home_bp, url_prefix='/home')
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(film_bp, url_prefix='/film')
+    # Esempio di utilizzo
+    data = getData(0)  # Ottieni i dati per la data di due giorni nel futuro
+
+    # Controllo se i dati sono stati ricevuti correttamente
+    if "program" in data:  # Verifica che ci sia una chiave "programs"
+        for program in data["program"]:  # Itera attraverso ogni programma nella lista "programs"
+            content = program.get("content")  # Estrai il titolo del programma
+            if content:  # Controlla se il titolo esiste
+                print(content.get("title"))  # Stampa il titolo
+    else:
+        print("ciao")
+
 
     # Aggiungi la route per la radice
     @app.route('/')
