@@ -3,20 +3,50 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1 class="title">Palinsesto Programmi</h1>
+    <h1 class="title">Palinsesto Programmi</h1>
 
-<div class="program-list">
-    {% for program in programs %}
-        <div class="program-item">
-            <h2>{{ program.title }}</h2>
-            <p><strong>Descrizione:</strong> {{ program.description }}</p>
-            <p><strong>Canale:</strong> {{ program.channel }}</p>
-            <p><strong>Data e ora:</strong> {{ program.date }}</p>
-            <p><strong>Durata:</strong> {{ program.duration }} minuti</p>
-            {% if program.image %}
-                <img src="{{ program.image[0]['url'] }}" alt="{{ program.title }} image" style="max-width: 200px;">
-            {% endif %}
+    <div class="container">
+        <div class="row">
+            {% for program in programs %}
+                {% if 'movie' in program.kind.lower() or 'education' in program.kind.lower() %}
+                    {% set sanitized_title = program.title | replace(' ', '-') | replace('\'', '') %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ program.title }}</h5>
+                                <div class="accordion" id="accordionExample{{ sanitized_title }}">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading{{ sanitized_title }}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse{{ sanitized_title }}" aria-expanded="false"
+                                                    aria-controls="collapse{{ sanitized_title }}">
+                                                Descrizione
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ sanitized_title }}" class="accordion-collapse collapse"
+                                             aria-labelledby="heading{{ sanitized_title }}"
+                                             data-bs-parent="#accordionExample{{ sanitized_title }}">
+                                            <div class="accordion-body">
+                                                <p>{{ program.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><strong>Canale:</strong> {{ program.channel }}</p>
+                                <p><strong>Data e ora:</strong> {{ program.date }}</p>
+                                <p><strong>Durata:</strong> {{ program.duration }} minuti</p>
+                                <div class="text-center"> <!-- Centra solo l'immagine -->
+                                    {% if program.image[0]['url'] %}
+                                        <img src="{{ program.image[0]['url'] }}" alt="{{ program.image[0]['url'] }} image" class="img-fluid">
+                                    {% else %}
+                                        <img src="{{ url_for('static', filename='media/Image-not-found.png') }}" alt="Image not found" class="img-fluid">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-    {% endfor %}
-</div>
+    </div>
 {% endblock %}

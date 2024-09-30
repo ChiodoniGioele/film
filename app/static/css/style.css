@@ -18,3 +18,25 @@
 .program-item img {
     margin-top: 10px;
 }
+
+.card {
+    border: 1px solid #ddd;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.accordion-button {
+    background-color: #f0f0f0; /* Grigio chiaro */
+    color: #000; /* Colore del testo */
+    border: 1px solid #ccc; /* Colore del bordo */
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e0e0e0; /* Colore grigio leggermente più scuro quando attivo */
+}
+
+.accordion-button:hover {
+    background-color: #d9d9d9; /* Colore grigio al passaggio del mouse */
+}
