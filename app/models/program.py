@@ -3,10 +3,10 @@ from datetime import date, timedelta
 
 
 
-def getData(day):
+def getData(day,channel):
     today = date.today()
     dayToGetData = today + timedelta(days=day)
-    url = f'https://epg.rsi.ch/mp-epg-frontend-api/web/la1?StartTime={dayToGetData}T00:00:00%2B02:00&EndTime={dayToGetData}T23:59:59%2B02:00'
+    url = f'https://epg.rsi.ch/mp-epg-frontend-api/web/{channel}?StartTime={dayToGetData}T00:00:00%2B02:00&EndTime={dayToGetData}T23:59:59%2B02:00'
 
     response = requests.get(url)
     if response.status_code == 200:
