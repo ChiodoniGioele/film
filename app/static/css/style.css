@@ -1,3 +1,11 @@
+.subtitle {
+    font-size: 0.9em; /* Dimensione un po' più piccola */
+    font-weight: 300; /* Scritta fine */
+    font-style: italic; /* Testo in corsivo */
+    color: #888888; /* Colore grigio */
+}
+
+
 .program-list {
     display: flex;
     flex-direction: column;
@@ -40,3 +48,5 @@
 .accordion-button:hover {
     background-color: #d9d9d9; /* Colore grigio al passaggio del mouse */
 }
+
+

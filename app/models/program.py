@@ -25,14 +25,19 @@ def getPrograms(data):
 
 class Program:
     def __init__(self, data):
-        self.title = data["content"]["title"]
-        self.description = data["content"]["longDescription"]
-        self.eppisodes = data["content"]["episodeNr"]
-        self.people = data["people"]
+        # Separazione del titolo e del sottotitolo
+        t = data["content"]["title"].split(" - ")
+        self.title = t[0]
+        self.subtitle = t[1] if len(t) > 1 else "-"
+
+        # Altri attributi
+        self.description = data["content"].get("longDescription", "")
+        self.episodes = data["content"].get("episodeNr", 0)  # Default a 0 se non esiste
+        self.people = data.get("people", [])
         self.image = data["srgPlay"]["Image"]["ImageRepresentation"][0]["variants"]
-        self.channel = data["channel"]
-        self.productionYear = data["content"]["productionYear"]
-        self.productTypeDesc = data["content"]["productTypeDesc"]
-        self.kind = data["kind"]
-        self.date = data["dateTimes"]["startTime"]
-        self.duration = data["dateTimes"]["realDuration"]
+        self.channel = data.get("channel", "")
+        self.productionYear = data["content"].get("productionYear", None)
+        self.productTypeDesc = data["content"].get("productTypeDesc", "")
+        self.kind = data.get("kind", "")
+        self.date = data["dateTimes"].get("startTime", None)
+        self.duration = data["dateTimes"].get("realDuration", 0)  # Default a 0 se non esiste
