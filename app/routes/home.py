@@ -14,7 +14,33 @@ def home():
         db.session.commit()
         return render_template('home/firstLogin.html')
 
-    return render_template('home/home.html')
+    data1 = getData(0, "la1")
+    data2 = getData(0, "la2")
+
+    print(f'data1: {data1}')  # Stampa il risultato di data1
+    print(f'data2: {data2}')  # Stampa il risultato di data2
+
+    # Unione dei dati
+    data = {**data1, **data2}
+
+    programs = getPrograms(data)  # Supponiamo che questo restituisca una lista di oggetti Program
+    print(f'Programs: {programs}')  # Debug: Stampa i programmi recuperati
+
+    user_preferences = current_user.preferences
+    preferences_list = [pref.genre for pref in user_preferences]
+
+    print(f'User Preferences: {preferences_list}')  # Stampa le preferenze dell'utente
+
+    program_preferences = []  # Inizializza come lista vuota
+
+    for program in programs:
+        if any(topic['label'] in preferences_list for topic in program.topics if 'label' in topic):
+            program_preferences.append(program)  # Aggiungi il programma alla lista
+
+    print(f'Filtered Program Preferences: {program_preferences}')  # Stampa i programmi filtrati
+
+    return render_template('home/home.html', programs=program_preferences)
+
 
 @home_bp.route('/la1')
 @login_required

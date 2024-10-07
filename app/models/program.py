@@ -25,13 +25,11 @@ def getPrograms(data):
 
 class Program:
     def __init__(self, data):
-
         t = data["content"]["title"].split(" - ")
         self.title = t[0]
         self.subtitle = t[1] if len(t) > 1 else "-"
-
         self.description = data["content"].get("longDescription", "")
-        self.episodes = data["content"].get("episodeNr", 0)  # Default a 0 se non esiste
+        self.episodes = data["content"].get("episodeNr", 0)
         self.people = data.get("people", [])
         self.image = data["srgPlay"]["Image"]["ImageRepresentation"][0]["variants"]
         self.channel = data.get("channel", "")
@@ -40,4 +38,11 @@ class Program:
         self.kind = data.get("kind", "")
         self.topics = data["srgPlay"]["topics"]
         self.date = data["dateTimes"].get("startTime", None)
-        self.duration = data["dateTimes"].get("realDuration", 0)  # Default a 0 se non esiste
+        self.duration = data["dateTimes"].get("realDuration", 0)
+
+    def __repr__(self):
+        topics_labels = [topic['label'] for topic in self.topics if 'label' in topic]  # Ottieni solo i label validi
+        return (f"<Program(title='{self.title}', "
+                f"subtitle='{self.subtitle}', "
+                f"topics={topics_labels}, "
+                f"productionYear={self.productionYear})>")
