@@ -1,10 +1,16 @@
+
+import logging;
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
+
 from app.models.program import *
 from app.models.model import *
 from ..config.db import db
 
 home_bp = Blueprint('home', __name__)
+logging.basicConfig(format='%(asctime)s %(message)s', filemode='w')
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 @home_bp.route('/')
 @login_required
@@ -17,29 +23,25 @@ def home():
     data1 = getData(0, "la1")
     data2 = getData(0, "la2")
 
-    print(f'data1: {data1}')  # Stampa il risultato di data1
-    print(f'data2: {data2}')  # Stampa il risultato di data2
+    program1 = getPrograms(data1)
+    program2 = getPrograms(data2)
 
-    # Unione dei dati
-    data = {**data1, **data2}
-
-    programs = getPrograms(data)  # Supponiamo che questo restituisca una lista di oggetti Program
-    print(f'Programs: {programs}')  # Debug: Stampa i programmi recuperati
+    programs = program1 + program2
 
     user_preferences = current_user.preferences
     preferences_list = [pref.genre for pref in user_preferences]
 
-    print(f'User Preferences: {preferences_list}')  # Stampa le preferenze dell'utente
 
-    program_preferences = []  # Inizializza come lista vuota
+    preferences_program = {preference: [] for preference in preferences_list}
+    for preference in preferences_list:
+        for program in programs:
+            if any(topic['label'] == preference for topic in program.topics):
+                preferences_program[preference].append(program)
 
-    for program in programs:
-        if any(topic['label'] in preferences_list for topic in program.topics if 'label' in topic):
-            program_preferences.append(program)  # Aggiungi il programma alla lista
+    logger.debug(f'Preferences: {preferences_program}')
 
-    print(f'Filtered Program Preferences: {program_preferences}')  # Stampa i programmi filtrati
+    return render_template('home/home.html', preferences_program=preferences_program)
 
-    return render_template('home/home.html', programs=program_preferences)
 
 
 @home_bp.route('/la1')
