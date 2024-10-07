@@ -57,16 +57,32 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-3" id="flashedMessagesContainer">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert alert-danger" role="alert">
-                    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
-                </div>
-            {% endif %}
-        {% endwith %}
-    </div>
+<div class="container mt-3" id="flashedMessagesContainer">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert
+                            {% if category == 'info' %}
+                                alert-info
+                            {% elif category == 'success' %}
+                                alert-success
+                            {% elif category == 'error' %}
+                                alert-danger
+                            {% endif %}
+                            " role="alert">
+                    {% if category == 'info' %}
+                        {{ message }}
+                    {% elif category == 'success' %}
+                        {{ message }}
+                    {% elif category == 'error' %}
+                        {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+                    {% endif %}
 
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
     <div class="container mt-5">
         {% block content %}{% endblock %}
     </div>

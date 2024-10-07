@@ -1,0 +1,146 @@
+{% extends "pageBase.html" %}
+
+{% block title %}First Login - Seleziona i tuoi generi preferiti{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="text-center mb-4">Seleziona i tuoi generi di film e serie TV preferiti</h1>
+                <form method="POST" action="{{ url_for('home.submit_preferences') }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Serie TV</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Serie TV"
+                                       id="serie_tv">
+                                <label class="form-check-label" for="serie_tv">Serie TV</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres"
+                                       value="Serie Tv Giallo e Crime" id="serie_tv_giallo">
+                                <label class="form-check-label" for="serie_tv_giallo">Serie Tv Giallo e Crime</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres"
+                                       value="Serie TV Alta tensione" id="serie_tv_alta_tensione">
+                                <label class="form-check-label" for="serie_tv_alta_tensione">Serie TV Alta
+                                    tensione</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres"
+                                       value="Serie TV Drama e Avventura" id="serie_tv_drama_avventura">
+                                <label class="form-check-label" for="serie_tv_drama_avventura">Serie TV Drama e
+                                    Avventura</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Film</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Film" id="film">
+                                <label class="form-check-label" for="film">Film</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Film Alta tensione"
+                                       id="film_alta_tensione">
+                                <label class="form-check-label" for="film_alta_tensione">Film Alta tensione</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Film Drammatico"
+                                       id="film_drammatico">
+                                <label class="form-check-label" for="film_drammatico">Film Drammatico</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Crime" id="crime">
+                                <label class="form-check-label" for="crime">Crime</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Storie vere"
+                                       id="storie_vere">
+                                <label class="form-check-label" for="storie_vere">Storie vere</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Commedia"
+                                       id="commedia">
+                                <label class="form-check-label" for="commedia">Commedia</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h5>Documentari</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Documentari"
+                                       id="documentari">
+                                <label class="form-check-label" for="documentari">Documentari</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Doc Natura"
+                                       id="doc_natura">
+                                <label class="form-check-label" for="doc_natura">Doc Natura</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres"
+                                       value="Doc scienza e tecnologia" id="doc_scienza_tecnologia">
+                                <label class="form-check-label" for="doc_scienza_tecnologia">Doc scienza e
+                                    tecnologia</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Doc Personaggi"
+                                       id="doc_personaggi">
+                                <label class="form-check-label" for="doc_personaggi">Doc Personaggi</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Doc Viaggi"
+                                       id="doc_viaggi">
+                                <label class="form-check-label" for="doc_viaggi">Doc Viaggi</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Altro</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="News" id="news">
+                                <label class="form-check-label" for="news">News</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Cultura"
+                                       id="cultura">
+                                <label class="form-check-label" for="cultura">Cultura</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Intrattenimento"
+                                       id="intrattenimento">
+                                <label class="form-check-label" for="intrattenimento">Intrattenimento</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Sport" id="sport">
+                                <label class="form-check-label" for="sport">Sport</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Approfondimento"
+                                       id="approfondimento">
+                                <label class="form-check-label" for="approfondimento">Approfondimento</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres" value="Quiz" id="quiz">
+                                <label class="form-check-label" for="quiz">Quiz</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres"
+                                       value="Ticino, Grigioni e Insubria" id="ticino_grigioni_insubria">
+                                <label class="form-check-label" for="ticino_grigioni_insubria">Ticino, Grigioni e
+                                    Insubria</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="genres"
+                                       value="Ritratti e personaggi" id="ritratti_personaggi">
+                                <label class="form-check-label" for="ritratti_personaggi">Ritratti e personaggi</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Salva preferenze</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

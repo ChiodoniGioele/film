@@ -3,56 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
-    <h1 class="title mb-5 mx-3 mt-1">Palinsesto Programmi</h1>
-
     <div class="container">
         <div class="row">
-            {% for program in programs %}
-                {% if 'movie' in program.kind.lower() or 'education' in program.kind.lower() %}
-                    {% set sanitized_title = program.title | replace(' ', '-') | replace('\'', '') %}
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm p-3 mb-5 bg-white rounded" >
-                            <div class="card-body">
-                                <h3 class="card-title">{{ program.title }}</h3>
-                                <h5 class="subtitle">{{ program.subtitle }}</h5>
-                                <div class="accordion mb-3" id="accordionExample{{ sanitized_title }}">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading{{ sanitized_title }}">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ sanitized_title }}"
-                                                    aria-expanded="false"
-                                                    aria-controls="collapse{{ sanitized_title }}">
-                                                Descrizione
-                                            </button>
-                                        </h2>
-                                        <div id="collapse{{ sanitized_title }}" class="accordion-collapse collapse"
-                                             aria-labelledby="heading{{ sanitized_title }}"
-                                             data-bs-parent="#accordionExample{{ sanitized_title }}">
-                                            <div class="accordion-body">
-                                                <p>{{ program.description }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <p><strong>Canale:</strong> {{ program.channel }}</p>
-                                <p><strong>Data e ora:</strong> {{ program.date }}</p>
-                                <p><strong>Durata:</strong> {{ program.duration }} minuti</p>
-                                <div class="text-center">
-                                    {% if program.image[0]['url'] %}
-                                        <img src="{{ program.image[0]['url'] }}"
-                                             alt="{{ program.image[0]['url'] }} image" class="img-fluid rounded">
-                                    {% else %}
-                                        <img src="{{ url_for('static', filename='media/Image-not-found.png') }}"
-                                             alt="Image not found" class="img-fluid rounded">
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+            <h1>Home</h1>
         </div>
     </div>
 {% endblock %}

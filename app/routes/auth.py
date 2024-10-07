@@ -21,7 +21,7 @@ def login_post():
     current_app.logger.info(f'User attempting to login: {user}')
 
     if not user or not user.check_password(password):
-        flash('Please check your login details and try again.')
+        flash('Please check your login details and try again.', 'error')
         return redirect(url_for('auth.login')) 
 
     login_user(user, remember=remember)
@@ -39,12 +39,12 @@ def signup_post():
     password = request.form.get('password')
 
     if not username or not email or not password:
-        flash('All fields are required.')
+        flash('All fields are required.', 'error')
         return redirect(url_for('auth.signup'))
 
     user = User.query.filter_by(email=email).first()
     if user:
-        flash('User with this email address already exists.')
+        flash('User with this email address already exists.','info')
         return redirect(url_for('auth.signup'))
 
     new_user = User(username=username, email=email)
