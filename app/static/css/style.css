@@ -1,8 +1,8 @@
 .subtitle {
-    font-size: 0.9em; /* Dimensione un po' più piccola */
-    font-weight: 300; /* Scritta fine */
-    font-style: italic; /* Testo in corsivo */
-    color: #888888; /* Colore grigio */
+    font-size: 0.9em;
+    font-weight: 300;
+    font-style: italic;
+    color: #888888;
 }
 
 
@@ -36,17 +36,17 @@
     font-weight: bold;
 }
 .accordion-button {
-    background-color: #f0f0f0; /* Grigio chiaro */
-    color: #000; /* Colore del testo */
-    border: 1px solid #ccc; /* Colore del bordo */
+    background-color: #f0f0f0;
+    color: #000;
+    border: 1px solid #ccc;
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #e0e0e0; /* Colore grigio leggermente più scuro quando attivo */
+    background-color: #e0e0e0;
 }
 
 .accordion-button:hover {
-    background-color: #d9d9d9; /* Colore grigio al passaggio del mouse */
+    background-color: #d9d9d9;
 }
 
 
